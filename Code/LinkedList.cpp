@@ -57,7 +57,7 @@ void insertionAfterNode()
         prev = curr;
         curr = curr->link;
     }
-    // beg insertion
+    // beginning insertion
     if (prev == NULL)
     {
         n->link = start;
@@ -70,9 +70,52 @@ void insertionAfterNode()
         prev->link = n;
     }
 }
+void deleteNode()
+{
+    int item;
+    cout << "Enter item to delete: ";
+    cin >> item;
+    node *ptr = start;
+    if (ptr == NULL)
+    {
+        cout << "Underflow Error!\nNo Element to delete";
+    }
+    node *prev = NULL;
+    node *curr = start;
+
+    while (ptr != NULL && ptr->info != item)
+    {
+        prev = ptr;
+        ptr = ptr->link;
+    }
+
+    if (ptr == NULL)
+    {
+        cout << "Element does not exist in the list\n";
+    }
+    else
+    {
+        if (prev == NULL)
+        {
+            start = ptr->link;
+        }
+
+        else
+        {
+            prev->link = ptr->link;
+            free(ptr);
+        }
+    }
+}
 void display()
 {
     struct node *ptr = start;
+
+    if (ptr == NULL)
+    {
+        cout << "Linked List is Empty!";
+        return;
+    }
     cout << "\nElements are : ";
     while (ptr != NULL)
     {
@@ -83,9 +126,9 @@ void display()
 int main()
 {
     int c = 1;
-    while ((c > 0) && (c < 5))
+    while ((c > 0) && (c < 6))
     {
-        cout << "\n1. Insertion at the beg. \n2. Insertion at End \n3. Insertion after Node\n4. Display \n";
+        cout << "\n1. Insertion at the beg. \n2. Insertion at End \n3. Insertion after Node\n4. Delete node\n5. Display \n";
         cout << ">";
         cin >> c;
         switch (c)
@@ -100,6 +143,9 @@ int main()
             insertionAfterNode();
             break;
         case 4:
+            deleteNode();
+            break;
+        case 5:
             display();
             break;
         default:
