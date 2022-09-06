@@ -33,45 +33,50 @@ void deletion()
     cin >> item;
 
     node *ptr = first;
-    // single node deletion
-    if (ptr->next->next == NULL and last->prev->prev == NULL)
+
+    while (ptr != NULL && ptr->data != item)
     {
-        first = nullptr;
-        last = nullptr;
+        ptr = ptr->next;
+    }
+
+    if (ptr == NULL)
+    {
+        cout << "no such elements" << endl;
         return;
     }
 
-    while (ptr != nullptr)
+    // single node deletion
+    if (first == last)
     {
-        if (ptr->data == item)
-        {
-            // first node deletion
-            if (ptr->prev == nullptr)
-            {
-                ptr->next->prev = nullptr;
-                first = ptr->next;
-                free(ptr);
-                break;
-            }
-            // last node deletion
-            else if (ptr->next == nullptr)
-            {
-                ptr->prev->next = nullptr;
-                last = ptr->prev;
-                free(ptr);
-                break;
-            }
-            // middle node deletion
-            else
-            {
-                ptr->prev->next = ptr->next;
-                ptr->next->prev = ptr->prev;
-                free(ptr);
-                break;
-            }
-        }
+        first = NULL;
+        last = NULL;
+        return;
+    }
 
-        ptr = ptr->next;
+    // first node deletion
+
+    else if (ptr == first)
+    {
+        ptr->next->prev = NULL;
+        first = ptr->next;
+        free(ptr);
+        return;
+    }
+    // last node deletion
+    else if (ptr == last)
+    {
+        last->prev->next = NULL;
+        last = last->prev;
+        free(ptr);
+        return;
+    }
+    // middle node deletion
+    else
+    {
+        ptr->prev->next = ptr->next;
+        ptr->next->prev = ptr->prev;
+        free(ptr);
+        return;
     }
 }
 
