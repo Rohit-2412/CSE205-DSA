@@ -25,6 +25,56 @@ void insertion()
         last = n;
     }
 }
+
+void deletion()
+{
+    int item;
+    cout << "\nEnter data\n";
+    cin >> item;
+
+    node *ptr = first;
+    // single node deletion
+    if (ptr->next->next == NULL and last->prev->prev == NULL)
+    {
+        first = nullptr;
+        last = nullptr;
+        return;
+    }
+
+    while (ptr != nullptr)
+    {
+        if (ptr->data == item)
+        {
+            // first node deletion
+            if (ptr->prev == nullptr)
+            {
+                ptr->next->prev = nullptr;
+                first = ptr->next;
+                free(ptr);
+                break;
+            }
+            // last node deletion
+            else if (ptr->next == nullptr)
+            {
+                ptr->prev->next = nullptr;
+                last = ptr->prev;
+                free(ptr);
+                break;
+            }
+            // middle node deletion
+            else
+            {
+                ptr->prev->next = ptr->next;
+                ptr->next->prev = ptr->prev;
+                free(ptr);
+                break;
+            }
+        }
+
+        ptr = ptr->next;
+    }
+}
+
 void traverse()
 {
     int c;
@@ -55,10 +105,10 @@ void traverse()
 int main()
 {
     int c = 1;
-    while ((c > 0) && (c < 3))
+    while ((c > 0) && (c < 4))
     {
 
-        cout << "\n1. Insertion \n2. Display\n";
+        cout << "\n1. Insertion \n2. Display\n3. Deletion\n>";
         cin >> c;
         switch (c)
         {
@@ -67,6 +117,9 @@ int main()
             break;
         case 2:
             traverse();
+            break;
+        case 3:
+            deletion();
             break;
         default:
             cout << "\nWrong input...";
