@@ -33,6 +33,14 @@ void insertionAtEnd()
     struct node *n = new node;
     n->info = item;
     node *tmp = start;
+
+    if (tmp == NULL)
+    {
+        n->link = NULL;
+        start = n;
+        return;
+    }
+
     while (tmp->link != NULL)
         tmp = tmp->link;
 
