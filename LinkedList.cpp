@@ -1,18 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Node class
 struct node
 {
+    // data members
     int info;
-    struct node *link;
+    struct node *link; // data member to store address of next node
 
+    // default constructor
     node() {}
+    // constructor to initialize data members
     node(int x)
     {
         info = x;
         link = NULL;
     }
 };
+// global variable to store address of first node or head node of linked list
 struct node *start = NULL;
 
 void insertion()
@@ -20,7 +25,9 @@ void insertion()
     int item;
     cout << "\nEnter data\n";
     cin >> item;
+    // create a new node
     struct node *n = new node;
+    // initialize data members of new node
     n->info = item;
     n->link = start;
     start = n;
