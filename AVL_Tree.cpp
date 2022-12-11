@@ -215,13 +215,14 @@ void printBinary(Node *root)
 int main()
 {
     Node *root = NULL;
-    int n;
-    cin >> n;
+    int arr[] = {15, 22, 29, 26, 24, 25, 10, 6, 12, 11, 23};
+    int n = 11;
+    // cin >> n;
     rep(i, 0, n)
     {
-        int d;
+        int d = arr[i];
         cout << "> ";
-        cin >> d;
+        // cin >> d;
         root = insert(root, d);
         printBinary(root);
         cout << endl;
